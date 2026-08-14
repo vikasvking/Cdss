@@ -1,0 +1,2 @@
+class Hemm < ApplicationRecord
+end

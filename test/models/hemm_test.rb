@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DumperTest < ActiveSupport::TestCase
+class HemmTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

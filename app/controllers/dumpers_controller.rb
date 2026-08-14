@@ -4,7 +4,7 @@ class DumpersController < ApplicationController
     render json: @dumpers
   end
 
-  def createDumpers
+  def create_dumpers
     @dumper=Dumper.new(dumper_params)
     if @dumper.save
       render json: @dumper,status: :created
