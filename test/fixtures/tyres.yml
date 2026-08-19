@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hemm: one
+  position: MyString
+  pressure: 9.99
+  sensor_id: MyString
+  active: false
+
+two:
+  hemm: two
+  position: MyString
+  pressure: 9.99
+  sensor_id: MyString
+  active: false

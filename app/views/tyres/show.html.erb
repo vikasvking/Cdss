@@ -1,0 +1,46 @@
+<h1>
+  Tyre <%= @tyre.position %>
+</h1>
+
+<p>
+  <strong>HEMM:</strong>
+  <%= @hemm.slno %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @tyre.position %>
+</p>
+
+<p>
+  <strong>Pressure:</strong>
+
+  <% if @tyre.pressure.present? %>
+    <%= @tyre.pressure %> PSI
+  <% else %>
+    Not available
+  <% end %>
+</p>
+
+<p>
+  <strong>TPMS Sensor:</strong>
+  <%= @tyre.sensor_id.presence || "Not assigned" %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+
+  <% if @tyre.active? %>
+    Active
+  <% else %>
+    Inactive
+  <% end %>
+</p>
+
+<%= link_to "Edit",
+            edit_hemm_tyre_path(@hemm, @tyre) %>
+
+|
+
+<%= link_to "Back",
+            hemm_tyres_path(@hemm) %>

@@ -1,0 +1,89 @@
+<h1>
+  Tyres - <%= @hemm.slno %>
+</h1>
+
+<p>
+  <%= link_to "Add Tyre",
+              new_hemm_tyre_path(@hemm) %>
+</p>
+
+<% if @tyres.any? %>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Position</th>
+      <th>Pressure</th>
+      <th>Sensor ID</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @tyres.each do |tyre| %>
+
+      <tr>
+
+        <td>
+          <strong>
+            <%= tyre.position %>
+          </strong>
+        </td>
+
+        <td>
+          <% if tyre.pressure.present? %>
+            <%= tyre.pressure %> PSI
+          <% else %>
+            -
+          <% end %>
+        </td>
+
+        <td>
+          <%= tyre.sensor_id.presence || "-" %>
+        </td>
+
+        <td>
+          <% if tyre.active? %>
+            Active
+          <% else %>
+            Inactive
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to "View",
+                      hemm_tyre_path(@hemm, tyre) %>
+
+          <%= link_to "Edit",
+                      edit_hemm_tyre_path(@hemm, tyre) %>
+
+          <%= button_to "Delete",
+                        hemm_tyre_path(@hemm, tyre),
+                        method: :delete,
+                        data: {
+                          turbo_confirm: "Are you sure?"
+                        } %>
+        </td>
+
+      </tr>
+
+    <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+  <p>
+    No tyres are currently mounted on this HEMM.
+  </p>
+
+  <%= link_to "Add the first tyre",
+              new_hemm_tyre_path(@hemm) %>
+
+<% end %>
+
+<br>
+
+<%= link_to "Back to HEMM",
+            hemm_path(@hemm) %>

@@ -1,0 +1,22 @@
+<div id="<%= dom_id tyre %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-medium mb-1">Hemm:</strong>
+    <%= tyre.hemm_id %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Position:</strong>
+    <%= tyre.position %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Pressure:</strong>
+    <%= tyre.pressure %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Sensor:</strong>
+    <%= tyre.sensor_id %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Active:</strong>
+    <%= tyre.active? ? "Yes" : "No" %>
+  </div>
+</div>
