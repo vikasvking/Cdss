@@ -4,7 +4,7 @@ class TyresController < ApplicationController
 
   # GET /tyres or /tyres.json
   def index
-    @tyres = @hemm.tyres.order(:position)
+    @tyres = @hemm.tyres.all
   end
 
   # GET /tyres/1 or /tyres/1.json
