@@ -5,7 +5,10 @@ class TyresController < ApplicationController
   # GET /tyres or /tyres.json
   def index
     @tyres = @hemm.tyres.all
-    render json: @tyres,status: :ok
+    respond_to do |format|
+      format.html
+      format.json { render json: @tyres }
+    end
   end
 
   # GET /tyres/1 or /tyres/1.json
