@@ -1,6 +1,6 @@
 class HemmsController < ApplicationController
   before_action :set_hemm, only: %i[ show edit update destroy ]
-
+  protect_from_forgery with: :null_session
   # GET /hemms or /hemms.json
   def index
     @hemms = Hemm.all
