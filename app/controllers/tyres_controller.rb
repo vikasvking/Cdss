@@ -47,9 +47,11 @@ class TyresController < ApplicationController
   def update
     respond_to do |format|
       if @tyre.update(tyre_params)
-        redirect_to hemm_tyres_path(@hemm), notice: "Tyre was successfully updated."
+        format.html{redirect_to hemm_tyres_path(@hemm), notice: "Tyre was successfully updated."}
+        format.json {render json: @tyre}
       else
-        redirect_to :edit, status: :unprocessable_content
+        format.html{redirect_to :edit, status: :unprocessable_content}
+        format.json {render json: @tyre.errors, status: :unprocessable_entity}
 
       end
     end
