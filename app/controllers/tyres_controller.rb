@@ -1,7 +1,7 @@
 class TyresController < ApplicationController
   before_action :set_hemm
   before_action :set_tyre, only: %i[ show edit update destroy ]
-
+  protect_from_forgery with: :null_session
   # GET /tyres or /tyres.json
   def index
     @tyres = @hemm.tyres.all
