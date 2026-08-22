@@ -18,6 +18,10 @@ class TyresController < ApplicationController
   # GET /tyres/new
   def new
     @tyre = @hemm.tyres.new
+    respond_to do |format|
+      format.html
+      format.json { render json: @tyres }
+    end
   end
 
   # GET /tyres/1/edit
@@ -30,9 +34,11 @@ class TyresController < ApplicationController
 
     respond_to do |format|
       if @tyre.save
-        redirect_to hemm_tyres_path(@hemm), notice: "Tyre was successfully created."
+        format.html {redirect_to hemm_tyres_path(@hemm), notice: "Tyre was successfully created."}
+        format.json {render json: @tyre, status: :created, location: @tyre}
       else
-        render :new, status: :unprocessable_entity
+        format.html { render :new, status: :unprocessable_entity}
+        format.json {render json: @tyre.errors, status: :unprocessable_entity}
       end
     end
   end
