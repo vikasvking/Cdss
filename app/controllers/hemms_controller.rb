@@ -18,7 +18,10 @@ class HemmsController < ApplicationController
   # GET /hemms/1/edit
   def edit
   end
-
+  def notification
+    @notification=Notification.all
+    render json: @notification
+  end
   # POST /hemms or /hemms.json
   def create
     @hemm = Hemm.new(hemm_params)
