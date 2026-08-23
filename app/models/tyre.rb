@@ -14,11 +14,14 @@ class Tyre < ApplicationRecord
   def log_change_to_notification
     significant_changes = saved_changes.except(:updated_at , :created_at)
     return if significant_changes.empty?
-    changed_attributes = significant_changes.keys.join(", ")
+    formatted_changes = significant_changes.map do |attribute, (old_value, new_value)|
+      "#{attribute} from '#{old_value}' to '#{new_value}'"
+    end.join(", ")
+
     Notification.create(
       hemm: hemm,
       notifiable: self,
-      message: "Tyre updated, Changed attributes: #{changed_attributes}",
+      message: "#{hemm.slno} Tyre Changes detected: #{formatted_changes}",
     )
   end
 end
