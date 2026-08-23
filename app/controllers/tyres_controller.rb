@@ -81,7 +81,8 @@ class TyresController < ApplicationController
       :position,
       :pressure,
       :sensor_id,
-      :active
+      :active,
+      :temp
       )
     end
 end

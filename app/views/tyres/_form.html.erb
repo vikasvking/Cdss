@@ -41,6 +41,19 @@
                           class: "block w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
 
+  <div>
+    <%= form.label :temp,
+                   "Temperature",
+                   class: "mb-2 block text-sm font-medium text-gray-700" %>
+
+    <%= form.number_field :temp,
+                          step: 0.1,
+                          min: 0,
+                          max: 150,
+                          placeholder: "e.g. 22.5",
+                          class: "block w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+
   <!-- TPMS Sensor ID -->
   <div>
     <%= form.label :sensor_id,
