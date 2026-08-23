@@ -9,10 +9,45 @@
 
   <%= render @hemm %>
 
-  <%= link_to "Edit this hemm", edit_hemm_path(@hemm), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to hemms", hemms_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this hemm", @hemm, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  <!-- Action Buttons -->
+  <div class="mt-4 flex flex-wrap gap-2">
+    <%= link_to "Edit this hemm", edit_hemm_path(@hemm), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    <%= link_to "Back to hemms", hemms_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    <%= button_to "Destroy this hemm", @hemm, method: :delete, form_class: "sm:inline-block", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+    <%= link_to "Tyre Pressure", hemm_tyres_path(@hemm), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  </div>
 
-    <%= link_to "Tyre Pressure", hemm_tyres_path(@hemm),class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <!-- Notifications Section -->
+  <div class="mt-10 pt-6 border-t border-gray-200">
+    <h2 class="font-bold text-2xl mb-4">Recent Activity</h2>
+
+    <% if @hemm.notifications.any? %>
+      <div class="flex flex-col gap-3">
+        <% @hemm.notifications.order(created_at: :desc).limit(10).each do |notification| %>
+          <div class="p-4 rounded-md border <%= notification.read_at.nil? ? 'border-blue-200 bg-blue-50' : 'border-gray-200 bg-white' %> shadow-sm">
+            <div class="flex justify-between items-start gap-4">
+              <p class="text-gray-800 text-sm"><%= notification.message %></p>
+              <span class="text-xs text-gray-500 whitespace-nowrap font-medium">
+                <%= time_ago_in_words(notification.created_at) %> ago
+              </span>
+            </div>
+            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">
+              Source: <%= notification.notifiable_type %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @hemm.notifications.count > 10 %>
+        <div class="mt-4 text-center">
+          <%= link_to "View all activity", "#", class: "text-sm text-blue-600 hover:underline" %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="p-4 rounded-md bg-gray-50 border border-gray-100 text-center">
+        <p class="text-gray-500 text-sm italic">No recent activity recorded for this HEMM.</p>
+      </div>
+    <% end %>
+  </div>
 
 </div>

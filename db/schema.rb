@@ -10,17 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_23_075659) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_23_083437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
-
-  create_table "dumpers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name"
-    t.string "project"
-    t.string "slno"
-    t.datetime "updated_at", null: false
-  end
 
   create_table "hemms", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -29,6 +21,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_23_075659) do
     t.string "model"
     t.string "slno"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "hemm_id", null: false
+    t.string "message"
+    t.bigint "notifiable_id", null: false
+    t.string "notifiable_type", null: false
+    t.datetime "read_at"
+    t.datetime "updated_at", null: false
+    t.index ["hemm_id"], name: "index_notifications_on_hemm_id"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
   end
 
   create_table "tyres", force: :cascade do |t|
@@ -43,5 +47,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_23_075659) do
     t.index ["hemm_id"], name: "index_tyres_on_hemm_id"
   end
 
+  add_foreign_key "notifications", "hemms"
   add_foreign_key "tyres", "hemms"
 end
